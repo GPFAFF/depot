@@ -1,0 +1,42 @@
+<% if notice %>
+  <aside id="notice"><% notice %></aside>
+<% end %>
+
+<h1>Products</h1>
+
+<table>
+  <thead>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <%= link_to 'New Product', new_product_path %>
+        </td>
+      </tr>
+    </tfoot>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <tr>
+        <td><%= product.title %></td>
+
+        <td class="description"><%= truncate(strip_tags(product.description), length: 80) %></td>
+
+        <td class="image"><%= image_tag(product.image_url, class: 'list_image') %></td>
+        <td><%= product.price %></td>
+        <td class="actions">
+          <ul>
+            <li><%= link_to 'Show', product %></li>
+            <li><%= link_to 'Edit', edit_product_path(product) %></li>
+            <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product', new_product_path %>
